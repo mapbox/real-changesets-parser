@@ -1,0 +1,39 @@
+[
+  {
+    "input": {
+      "id": "4725237064",
+      "lat": "47.6354864",
+      "lon": "7.6434750",
+      "version": "1",
+      "timestamp": "2017-03-09T04:17:12Z",
+      "changeset": "46698448",
+      "uid": "4803523",
+      "user": "xDSF-DFSx",
+      "action": "create",
+      "type": "node",
+      "tags": {}
+    },
+    "output": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            7.6434750,
+            47.6354864
+          ]
+        },
+        "properties": {
+          "id": "4725237064",
+          "version": "1",
+          "timestamp": "2017-03-09T04:17:12Z",
+          "changeset": "46698448",
+          "uid": "4803523",
+          "user": "xDSF-DFSx",
+          "action": "create",
+          "type": "node"
+        }
+      }  
+    ]
+  }
+]
