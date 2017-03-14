@@ -31,9 +31,10 @@
           "uid": "4803523",
           "user": "xDSF-DFSx",
           "action": "create",
-          "type": "node"
+          "type": "node",
+          "tags": {}
         }
-      }  
+      }
     ]
   }
 ]
