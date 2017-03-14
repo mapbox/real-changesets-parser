@@ -55,7 +55,7 @@
         "type": "Feature",
         "geometry": {
           "type": "LineString",
-          "coordiantes": [
+          "coordinates": [
             [
               69.4159455,
               41.1770844
