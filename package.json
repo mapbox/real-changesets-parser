@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Convert JSONs returned by osm-adiff-parser to proper geojsons",
   "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "test": "tape tests/index.js"
   },
@@ -23,9 +20,9 @@
     "tape": "^4.6.3"
   },
   "dependencies": {
+    "@turf/bbox": "^3.13.0",
     "@turf/bbox-polygon": "^3.13.0",
     "@turf/helpers": "^3.13.0",
-    "lodash.omit": "^4.5.0",
-    "lodash.pick": "^4.4.0"
+    "lodash.omit": "^4.5.0"
   }
 }

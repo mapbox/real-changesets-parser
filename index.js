@@ -1,5 +1,4 @@
 var omit = require('lodash.omit');
-var pick = require('lodash.pick');
 var turf = require('@turf/helpers');
 var createBbox = require('@turf/bbox');
 var createBboxPolygon = require('@turf/bbox-polygon');
@@ -31,35 +30,34 @@ function RealChangesetsParser(json) {
   }
 
   function createRelation(data) {
-    var members = data.members.map(createFeature);
-    var feature = createBboxPolygon(createBbox(members));
+    data.relations = data.members.map(createFeature);
+    var feature = createBboxPolygon(createBbox(turf.featureCollection(data.relations)));
     feature.properties = omit(data, ['members']);
     return feature;
-  }
-
-  function copyOldGeometry() {
-    switch(json.type) {
-      case 'node':
-        json.lon = json.old.lon;
-        json.lat = json.old.lat;
-      case 'way':
-        json.nodes = json.old.nodes;
-      case 'relation':
-        json.members = json.old.members;
-    }
   }
 
   // If the feature was deleted, copy its
   // geometry from the old feature
   if (json.action === 'delete') {
-    copyOldGeometry();
+    switch(json.type) {
+      case 'node':
+        json.lon = json.old.lon;
+        json.lat = json.old.lat;
+        break;
+      case 'way':
+        json.nodes = json.old.nodes;
+        break;
+      case 'relation':
+        json.members = json.old.members;
+        break;
+    }
   }
 
   return (
-    json.old
-      ? [omit(json, ['old'], pick(json, ['old']))]
+    'old' in json
+      ? [omit(json, ['old']), json.old]
       : [json]
     ).map(createFeature);
 }
 
-module.exports = RealChangeSetsParser;
+module.exports = RealChangesetsParser;
