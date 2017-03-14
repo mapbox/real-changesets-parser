@@ -92,8 +92,7 @@
           "user": "AlexLabrada",
           "action": "delete",
           "type": "way",
-          "tags": {},
-          "nodes": []
+          "tags": {}
         }
       },
       {
