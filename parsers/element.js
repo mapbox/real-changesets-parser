@@ -1,4 +1,4 @@
-var omit = require('lodash.omit');
+var R = require('ramda');
 var turf = require('@turf/helpers');
 var createBbox = require('@turf/bbox');
 var createBboxPolygon = require('@turf/bbox-polygon');
@@ -17,7 +17,7 @@ function ElementParser(json) {
 
   function createNode(data) {
     var geometry = [data.lon, data.lat].map(parseFloat);
-    var properties = omit(data, ['lon', 'lat']);
+    var properties = R.omit(['lon', 'lat'], data);
     return turf.point(geometry, properties);
   }
 
@@ -25,14 +25,14 @@ function ElementParser(json) {
     var geometry = data.nodes.map(function(node) {
       return [node.lon, node.lat].map(parseFloat);
     });
-    var properties = omit(data, ['nodes']);
+    var properties = R.omit(['nodes'], data);
     return turf.lineString(geometry, properties);
   }
 
   function createRelation(data) {
     data.relations = data.members.map(createFeature);
     var feature = createBboxPolygon(createBbox(turf.featureCollection(data.relations)));
-    feature.properties = omit(data, ['members']);
+    feature.properties = R.omit(['members'], data);
     return feature;
   }
 
@@ -55,7 +55,7 @@ function ElementParser(json) {
 
   return (
     'old' in json
-      ? [omit(json, ['old']), json.old]
+      ? [R.omit(['old'], json), json.old]
       : [json]
     ).map(createFeature);
 }

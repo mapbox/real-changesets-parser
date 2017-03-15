@@ -23,7 +23,6 @@
     "@turf/bbox": "^3.13.0",
     "@turf/bbox-polygon": "^3.13.0",
     "@turf/helpers": "^3.13.0",
-    "lodash.omit": "^4.5.0",
     "ramda": "^0.23.0"
   }
 }
