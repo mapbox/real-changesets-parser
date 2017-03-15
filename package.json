@@ -1,6 +1,6 @@
 {
   "name": "real-changesets-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Convert JSONs returned by osm-adiff-parser to proper geojsons",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
     "@turf/bbox": "^3.13.0",
     "@turf/bbox-polygon": "^3.13.0",
     "@turf/helpers": "^3.13.0",
-    "lodash.omit": "^4.5.0"
+    "lodash.omit": "^4.5.0",
+    "ramda": "^0.23.0"
   }
 }
