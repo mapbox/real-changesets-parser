@@ -30,10 +30,13 @@ function ElementParser(json) {
   }
 
   function createRelation(data) {
-    data.relations = data.members.map(createFeature);
-    var feature = createBboxPolygon(createBbox(turf.featureCollection(data.relations)));
-    feature.properties = R.omit(['members'], data);
-    return feature;
+    if ('members' in data) {
+        data.relations = data.members.map(createFeature).filter(R.complement(R.isNil)); // filter out nulls
+        var feature = createBboxPolygon(createBbox(turf.featureCollection(data.relations)));
+        feature.properties = R.omit(['members'], data);
+        return feature;
+    }
+    return null;
   }
 
   // If the feature was deleted, copy its
