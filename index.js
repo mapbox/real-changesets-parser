@@ -9,4 +9,6 @@ var changesetParser = R.pipe(
   featureCollection
 );
 
+changesetParser.elementParser = elementParser;
 module.exports = changesetParser;
+

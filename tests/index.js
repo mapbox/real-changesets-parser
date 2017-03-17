@@ -1,6 +1,6 @@
 const fs = require('fs');
 const tape = require('tape');
-const elementParser = require('../parsers/element.js');
+const elementParser = require('../index.js').elementParser;
 
 const filenames = fs.readdirSync('tests/data', { encoding: 'utf-8' });
 
