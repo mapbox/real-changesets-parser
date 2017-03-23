@@ -6339,6 +6339,7 @@
             "to": "Habana Vieja",
             "type": "route"
           },
+          "changeType": "modifiedNew",
           "relations": [
             {
               "type": "Feature",
@@ -10148,6 +10149,7 @@
             "to": "Habana Vieja",
             "type": "route"
           },
+          "changeType": "modifiedOld",
           "relations": [
             {
               "type": "Feature",

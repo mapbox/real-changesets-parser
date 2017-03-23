@@ -45,7 +45,8 @@
           "user": "AlexLabrada",
           "action": "delete",
           "type": "node",
-          "tags": {}
+          "tags": {},
+          "changeType": "deletedNew"
         }
       },
       {
@@ -66,7 +67,8 @@
           "user": "frodrigo",
           "action": "delete",
           "type": "node",
-          "tags": {}
+          "tags": {},
+          "changeType": "deletedOld"
         }
       }
     ]
