@@ -32,7 +32,8 @@
           "user": "xDSF-DFSx",
           "action": "create",
           "type": "node",
-          "tags": {}
+          "tags": {},
+          "changeType": "added"
         }
       }
     ]

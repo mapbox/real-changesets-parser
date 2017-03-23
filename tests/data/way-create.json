@@ -97,7 +97,8 @@
           "type": "way",
           "tags": {
             "waterway": "ditch"
-          }
+          },
+          "changeType": "added"
         }
       }
     ]

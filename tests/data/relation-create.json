@@ -136,6 +136,7 @@
             "layer": "1",
             "type": "bridge"
           },
+          "changeType": "added",
           "relations": [
             {
               "type": "Feature",

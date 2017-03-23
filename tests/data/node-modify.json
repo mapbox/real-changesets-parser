@@ -45,7 +45,8 @@
           "user": "xDSF-DFSx",
           "action": "modify",
           "type": "node",
-          "tags": {}
+          "tags": {},
+          "changeType": "modifiedNew"
         }
       },
       {
@@ -66,7 +67,8 @@
           "user": "hkucharek",
           "action": "modify",
           "type": "node",
-          "tags": {}
+          "tags": {},
+          "changeType": "modifiedOld"
         }
       }
     ]

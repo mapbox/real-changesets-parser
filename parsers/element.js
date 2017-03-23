@@ -56,6 +56,21 @@ function ElementParser(json) {
     }
   }
 
+  // Set change type
+  switch(json.action) {
+    case 'create':
+      json.changeType = 'added';
+      break;
+    case 'delete':
+      json.changeType = 'deletedNew';
+      json.old.changeType = 'deletedOld';
+      break;
+    case 'modify':
+      json.changeType = 'modifiedNew';
+      json.old.changeType = 'modifiedOld';
+      break;
+  }
+
   return (
     'old' in json
       ? [R.omit(['old'], json), json.old]
