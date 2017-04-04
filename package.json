@@ -23,6 +23,7 @@
     "@turf/bbox": "^3.13.0",
     "@turf/bbox-polygon": "^3.13.0",
     "@turf/helpers": "^3.13.0",
+    "id-area-keys": "^2.1.2",
     "ramda": "^0.23.0"
   }
 }
