@@ -30,9 +30,9 @@ function ElementParser(json) {
 
     if (data.tags && ak.isArea(data.tags) && isClosedWay(data.nodes)) {
       return turf.polygon([geometry], properties);
-    }
-    else
+    } else {
       return turf.lineString(geometry, properties);
+    }
   }
 
   function createRelation(data) {
@@ -87,9 +87,7 @@ function ElementParser(json) {
 function isClosedWay(nodes) {
   var firstNode = nodes[0];
   var lastNode = nodes[nodes.length - 1];
-  if (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon)
-    return true;
-  return false;
+  return (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon);
 }
 
 module.exports = ElementParser;
