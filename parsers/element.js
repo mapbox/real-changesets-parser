@@ -2,6 +2,7 @@ var R = require('ramda');
 var turf = require('@turf/helpers');
 var createBbox = require('@turf/bbox');
 var createBboxPolygon = require('@turf/bbox-polygon');
+var ak = require('id-area-keys');
 
 function ElementParser(json) {
   function createFeature(data) {
@@ -26,7 +27,12 @@ function ElementParser(json) {
       return [node.lon, node.lat].map(parseFloat);
     });
     var properties = R.omit(['nodes'], data);
-    return turf.lineString(geometry, properties);
+
+    if (data.tags && ak.isArea(data.tags) && isClosedWay(data.nodes)) {
+      return turf.polygon([geometry], properties);
+    }
+    else
+      return turf.lineString(geometry, properties);
   }
 
   function createRelation(data) {
@@ -76,6 +82,14 @@ function ElementParser(json) {
       ? [R.omit(['old'], json), json.old]
       : [json]
     ).map(createFeature);
+}
+
+function isClosedWay(nodes) {
+  var firstNode = nodes[0];
+  var lastNode = nodes[nodes.length - 1];
+  if (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon)
+    return true;
+  return false;
 }
 
 module.exports = ElementParser;
