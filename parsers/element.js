@@ -85,9 +85,13 @@ function ElementParser(json) {
 }
 
 function isClosedWay(nodes) {
-  var firstNode = nodes[0];
-  var lastNode = nodes[nodes.length - 1];
-  return (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon && nodes.length > 2);
+  // Each LinearRing of a Polygon must have 4 or more Positions
+  if (nodes.length > 3) {
+    var firstNode = nodes[0];
+    var lastNode = nodes[nodes.length - 1];
+    return (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon);
+  }
+  return false;
 }
 
 module.exports = ElementParser;
