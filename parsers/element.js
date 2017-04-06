@@ -87,7 +87,7 @@ function ElementParser(json) {
 function isClosedWay(nodes) {
   var firstNode = nodes[0];
   var lastNode = nodes[nodes.length - 1];
-  return (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon);
+  return (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon && nodes.length > 2);
 }
 
 module.exports = ElementParser;
