@@ -1,6 +1,6 @@
 {
   "name": "real-changesets-parser",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Convert JSONs returned by osm-adiff-parser to proper geojsons",
   "main": "index.js",
   "scripts": {
