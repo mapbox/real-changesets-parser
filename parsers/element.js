@@ -23,9 +23,13 @@ function ElementParser(json) {
   }
 
   function createWay(data) {
-    var geometry = data.nodes.map(function(node) {
-      return [node.lon, node.lat].map(parseFloat);
-    });
+    var geometry = data.nodes
+      .filter(function(node) {
+        return Object.keys(node).includes('lat') && Object.keys(node).includes('lon')
+      })
+      .map(function(node) {
+        return [node.lon, node.lat].map(parseFloat);
+      });
     var properties = R.omit(['nodes'], data);
 
     if (data.tags && ak.isArea(data.tags) && isClosedWay(data.nodes)) {
