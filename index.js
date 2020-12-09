@@ -11,4 +11,3 @@ var changesetParser = R.pipe(
 
 changesetParser.elementParser = elementParser;
 module.exports = changesetParser;
-

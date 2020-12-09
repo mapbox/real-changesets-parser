@@ -1,7 +1,7 @@
 var R = require('ramda');
 var turf = require('@turf/helpers');
-var createBbox = require('@turf/bbox');
-var createBboxPolygon = require('@turf/bbox-polygon');
+var createBbox = require('@turf/bbox').default;
+var createBboxPolygon = require('@turf/bbox-polygon').default;
 var ak = require('id-area-keys');
 
 function ElementParser(json) {
@@ -23,6 +23,9 @@ function ElementParser(json) {
   }
 
   function createWay(data) {
+    if (data.nodes.length === 0) {
+      return;
+    }
     var geometry = data.nodes
       .filter(function(node) {
         return Object.keys(node).includes('lat') && Object.keys(node).includes('lon')
@@ -33,9 +36,9 @@ function ElementParser(json) {
     var properties = R.omit(['nodes'], data);
 
     if (data.tags && ak.isArea(data.tags) && isClosedWay(data.nodes)) {
-      return turf.polygon([geometry], properties);
+      return R.omit(['bbox'], turf.polygon([geometry], properties));
     } else {
-      return turf.lineString(geometry, properties);
+      return R.omit(['bbox'], turf.lineString(geometry, properties));
     }
   }
 
@@ -44,7 +47,7 @@ function ElementParser(json) {
         data.relations = data.members.map(createFeature).filter(R.complement(R.isNil)); // filter out nulls
         var feature = createBboxPolygon(createBbox(turf.featureCollection(data.relations)));
         feature.properties = R.omit(['members'], data);
-        return feature;
+        return R.omit(['bbox'], feature);
     }
     return null;
   }
@@ -93,7 +96,11 @@ function isClosedWay(nodes) {
   if (nodes.length > 3) {
     var firstNode = nodes[0];
     var lastNode = nodes[nodes.length - 1];
-    return (firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon);
+    return (
+      Object.keys(firstNode).includes('lat') && Object.keys(firstNode).includes('lon') &&
+      Object.keys(lastNode).includes('lat') && Object.keys(lastNode).includes('lon') &&
+      firstNode.lat === lastNode.lat && firstNode.lon === lastNode.lon
+    );
   }
   return false;
 }
