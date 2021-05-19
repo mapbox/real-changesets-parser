@@ -17,9 +17,11 @@ function ElementParser(json) {
   }
 
   function createNode(data) {
-    var geometry = [data.lon, data.lat].map(parseFloat);
-    var properties = R.omit(['lon', 'lat'], data);
-    return turf.point(geometry, properties);
+    if (Object.keys(data).includes('lat') && Object.keys(data).includes('lon')) {
+      var geometry = [data.lon, data.lat].map(parseFloat);
+      var properties = R.omit(['lon', 'lat'], data);
+      return turf.point(geometry, properties);
+    }
   }
 
   function createWay(data) {
@@ -28,7 +30,7 @@ function ElementParser(json) {
     }
     var geometry = data.nodes
       .filter(function(node) {
-        return Object.keys(node).includes('lat') && Object.keys(node).includes('lon')
+        return Object.keys(node).includes('lat') && Object.keys(node).includes('lon');
       })
       .map(function(node) {
         return [node.lon, node.lat].map(parseFloat);
@@ -44,10 +46,10 @@ function ElementParser(json) {
 
   function createRelation(data) {
     if ('members' in data) {
-        data.relations = data.members.map(createFeature).filter(R.complement(R.isNil)); // filter out nulls
-        var feature = createBboxPolygon(createBbox(turf.featureCollection(data.relations)));
-        feature.properties = R.omit(['members'], data);
-        return R.omit(['bbox'], feature);
+      data.relations = data.members.map(createFeature).filter(R.complement(R.isNil)); // filter out nulls
+      var feature = createBboxPolygon(createBbox(turf.featureCollection(data.relations)));
+      feature.properties = R.omit(['members'], data);
+      return R.omit(['bbox'], feature);
     }
     return null;
   }
